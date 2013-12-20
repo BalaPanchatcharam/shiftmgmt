@@ -35,11 +35,12 @@ public class ContactController  {
 	private ContactService contactService;
 	
 	@RequestMapping(value="/contact/view.action")
-	public @ResponseBody Map<String,? extends Object> view(@RequestParam int start, @RequestParam int limit) throws Exception {
+	public @ResponseBody Map<String,? extends Object> view(@RequestParam (value="won", required = false) String won, @RequestParam int start, @RequestParam int limit) throws Exception {
 
 		try{
-            System.out.println("Size is ");
-
+			if (won != null ) {
+            System.out.println("Size is " + won);
+			}
 			List<Employee> contacts = contactService.getContactList(0,10);
 			
 			//int total = contactService.getTotalContacts();

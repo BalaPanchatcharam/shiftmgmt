@@ -85,11 +85,10 @@ Ext.define('empJS.view.employee.List' ,{
 	        		           ]
 	        	   })
 	           },{
-	        	   text: 'SHIFT<br> [MON-SUN]',
+	        	   text: 'SHIFT',
 	        	   columns: [{
-	        		   header: "MON",
+	        		   header: "MON     ",
 	        		   flex : 2,
-	        		   heigth: 200,
 	        		   dataIndex: 'mon',
 	        		   editor :  new Ext.form.field.ComboBox({
 	        			   typeAhead: true,
@@ -255,7 +254,7 @@ Ext.define('empJS.view.employee.List' ,{
 	                               for (var j=8;j<15;j++) {
 	                            	   var dateD = Ext.Date.format(nextDate,'d/m');
 	                            	   var dayD = Ext.Date.format(nextDate,'D');
-	                            	   var textD = dateD;//+"<br>"+dayD.toUpperCase();
+	                            	   var textD = dateD+"<br>"+dayD.toUpperCase();
 	                            	   this.up('grid').columns[j].setText(textD);
 	                            	   nextDate =  Ext.Date.add(nextDate,Ext.Date.DAY,1);
 	                               }

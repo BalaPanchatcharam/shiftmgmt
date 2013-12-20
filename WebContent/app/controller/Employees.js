@@ -5,9 +5,12 @@ Ext.define('empJS.controller.Employees', {
 
     models: ['Employee'],
 
-    views: ['employee.List'],
+    views: ['employee.List', 'employee.Search'],
 
     refs: [{
+            ref: 'employeesearch',
+            selector: 'employeesearch'
+        },{
             ref: 'employeelist',
             selector: 'employeelist'
         }
@@ -15,9 +18,9 @@ Ext.define('empJS.controller.Employees', {
 
     init: function() {
         this.control({
-            /*'employeelist dataview': {
-                itemdblclick: this.editUser
-            },*/
+            'employeelist button[action=search]': {
+                click: this.searchUser
+            },
             'employeelist button[action=add]': {
             	click: this.editUser
             },
@@ -29,6 +32,13 @@ Ext.define('empJS.controller.Employees', {
             }
         });
     },
+    
+    searchUser: function(button) {
+    	var won = button.up('grid').down('#WON').value;
+    	this.getEmployeesStore().load({
+    		params: {won : won}
+    	});
+    },
 
     editUser: function(grid, record) {
     	record = Ext.create('empJS.model.Employee');
@@ -37,11 +47,11 @@ Ext.define('empJS.controller.Employees', {
     },
     
     updateUser: function(button) {
-        var win    = button.up('window'),
-            form   = win.down('form'),
+        var won    = button.up('grid').down('#WON').value;
+        var wkdate = button.up('grid').down('#WKDATE').value;
+           /* form   = win.down('form'),
             record = form.getRecord(),
             values = form.getValues();
-        
         
 		if (values.id > 0){
 			record.set(values);
@@ -50,9 +60,8 @@ Ext.define('empJS.controller.Employees', {
 			record.set(values);
 			record.setId(0);
 			this.getEmployeesStore().add(record);
-		}
+		}*/
         
-		win.close();
         this.getEmployeesStore().sync();
     },
     

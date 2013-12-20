@@ -22,10 +22,20 @@ Ext.application({
 
     launch: function() {
         Ext.create('Ext.container.Viewport', {
-            layout: 'fit',
+            layout: 'border',
             items: [
                 {
-                    xtype: 'employeelist'
+                	xtype: 'employeelist',
+                	region: 'center'
+                }, {
+
+                	title: 'Shift Timings',
+                	collapsed: false,
+                	collapsible: true,
+                	width: 640,
+                	text: 'bala',
+                	html: '<p></p><p></p><p><b>REG: 10AM to 7 PM</b>&nbsp;&nbsp;&nbsp;&nbsp<b>LN: 2PM to 10PM</b>&nbsp;&nbsp;&nbsp;&nbsp<b>NY: 7PM to 6AM</b></p><p></p><p></p',
+                	region: 'south'
                 }
             ]
         });

@@ -1,4 +1,4 @@
-package com.braziljs.loiane.util;
+package com.shiftmgmt.util;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,8 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.braziljs.loiane.model.Contact;
-import com.braziljs.loiane.model.Employee;
+import com.shiftmgmt.model.Employee;
 
 /**
  * Util class, returns a Map in the format Ext JS expects
@@ -29,7 +28,7 @@ public class ExtJSReturn {
 	 * @param contacts
 	 * @return
 	 */
-	public static Map<String,Object> mapOK(List<Contact> contacts){
+	public static Map<String,Object> mapOK(List<Employee> contacts){
 		
 		Map<String,Object> modelMap = new HashMap<String,Object>(3);
 		modelMap.put("total", contacts.size());
@@ -45,6 +44,16 @@ public class ExtJSReturn {
 	 * @return
 	 */
 	public static Map<String,Object> mapOK(List<Employee> contacts, int total){
+		
+		Map<String,Object> modelMap = new HashMap<String,Object>(3);
+		modelMap.put("total", total);
+		modelMap.put("data", contacts);
+		modelMap.put("success", true);
+		
+		return modelMap;
+	}
+	
+public static Map<String,Object> mapOK1(List<Employee> contacts, int total){
 		
 		Map<String,Object> modelMap = new HashMap<String,Object>(3);
 		modelMap.put("total", total);

@@ -1,4 +1,6 @@
-package com.braziljs.loiane.model;
+package com.shiftmgmt.model;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,8 +51,16 @@ public class Employee {
 	@Column(name="drop_loc")
 	private String dropLoc;
 	
-	private Boolean active;
+	//private Boolean active;
 	private long won;
+	//private Date wkdate;
+	private String mon;
+	private String tue;
+	private String wed;
+	private String thu;
+	private String fri;
+	private String sat;
+	private String sun;
 	
 	public long getId() {
 		return id;
@@ -93,7 +103,7 @@ public class Employee {
 		return msm;
 	}
 	
-	public void setId(String id) {
+	public void setMsm(String id) {
 		this.msm = id;
 	}
 	
@@ -122,18 +132,59 @@ public class Employee {
 	}
 	
 	public String  getDropLoc() {
-		return pickLoc;
+		return dropLoc;
 	}
 	
 	public void setDropLoc(String param) {
 		this.dropLoc = param;
 	}
 	
-	public Boolean  getActive() {
-		return active;
+	/*public Date getWkdate() {
+		return wkdate;
 	}
-	
-	public void setAcive(Boolean param) {
-		this.active = param;
+	public void setWkdate(Date  dt) {
+		wkdate = dt;
+	}*/
+	public void setTue(String shift) {
+		this.tue = shift;
+	}
+	public String getTue() {
+		return tue;
+	}
+	public String getWed() {
+		return wed;
+	}
+	public void setWed(String shift) {
+		this.wed = shift;
+	}
+	public String getMon() {
+		return mon;
+	}
+	public void setMon(String shift) {
+		this.mon = shift;
+	}
+	public String getThu() {
+		return thu;
+	}
+	public void setThu(String shift) {
+		this.thu = shift;
+	}
+	public String getFri() {
+		return fri;
+	}
+	public void setFri(String shift) {
+		this.fri = shift;
+	}
+	public String getSat() {
+		return sat;
+	}
+	public void setSat(String shift) {
+		this.sat = shift;
+	}
+	public String getSun() {
+		return sun;
+	}
+	public void setSun(String shift) {
+		this.sun = shift;
 	}
 }

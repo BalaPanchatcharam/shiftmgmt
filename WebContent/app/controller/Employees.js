@@ -8,9 +8,6 @@ Ext.define('empJS.controller.Employees', {
     views: ['employee.List', 'employee.Search'],
 
     refs: [{
-            ref: 'employeesearch',
-            selector: 'employeesearch'
-        },{
             ref: 'employeelist',
             selector: 'employeelist'
         }
@@ -35,8 +32,12 @@ Ext.define('empJS.controller.Employees', {
     
     searchUser: function(button) {
     	var won = button.up('grid').down('#WON').value;
+    	var wkdate = button.up('grid').down('#WKDATE').getSubmitValue();
+    	 if (typeof won == 'undefined' || typeof wkdate == 'undefined') {
+         	Ext.MessageBox.alert('Input Missing', 'Enter WON and Week to Search.');
+         }
     	this.getEmployeesStore().load({
-    		params: {won : won}
+    		params: {won : won, wkdate: wkdate}
     	});
     },
 
@@ -49,19 +50,9 @@ Ext.define('empJS.controller.Employees', {
     updateUser: function(button) {
         var won    = button.up('grid').down('#WON').value;
         var wkdate = button.up('grid').down('#WKDATE').value;
-           /* form   = win.down('form'),
-            record = form.getRecord(),
-            values = form.getValues();
-        
-		if (values.id > 0){
-			record.set(values);
-		} else{
-			record = Ext.create('empJS.model.Employee');
-			record.set(values);
-			record.setId(0);
-			this.getEmployeesStore().add(record);
-		}*/
-        
+        if (typeof won == 'undefined' ||typeof wkdate == 'undefined') {
+        	Ext.MessageBox.alert('Input Missing', 'Enter WON and Week before Update.');
+        }
         this.getEmployeesStore().sync();
     },
     
@@ -74,3 +65,5 @@ Ext.define('empJS.controller.Employees', {
 	    this.getEmployeesStore().sync();
     }
 });
+
+

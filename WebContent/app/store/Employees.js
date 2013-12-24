@@ -1,17 +1,16 @@
 Ext.define('empJS.store.Employees', {
     extend: 'Ext.data.Store',
     model: 'empJS.model.Employee',
-    autoLoad: true,
     pageSize: 35,
     autoLoad: {start: 0, limit: 35},
     
     proxy: {
         type: 'ajax',
         api: {
-        	read : 'contact/view.action',
-            create : 'contact/create.action',
-            update: 'contact/update.action',
-            destroy: 'contact/delete.action'
+        	read : 'employee/view.action',
+            create : 'employee/create.action',
+            update: 'employee/update.action',
+            destroy: 'employee/delete.action'
         },
         reader: {
             type: 'json',
@@ -20,7 +19,10 @@ Ext.define('empJS.store.Employees', {
         },
         writer: {
             type: 'json',
+            allowSingle: false,
             writeAllFields: true,
+            headers: { 'Content-Type': 'application/json' },
+            content: 'application/json',
             encode: false,
             root: 'data'
         },

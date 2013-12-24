@@ -1,6 +1,7 @@
-package com.braziljs.loiane.dao;
+package com.shiftmgmt.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,8 +15,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.braziljs.loiane.model.Contact;
-import com.braziljs.loiane.model.Employee;
+import com.shiftmgmt.model.Employee;
 
 /**
  * Contact DAO class.
@@ -30,28 +30,22 @@ import com.braziljs.loiane.model.Employee;
  * http://loiane.com (Portuguese)
  */
 @Repository
-public class ContactDAO {
-	
-	private HibernateTemplate hibernateTemplate;
+public class EmployeeDAO {
 	
 	@PersistenceContext
 	private EntityManager em;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		hibernateTemplate = new HibernateTemplate(sessionFactory);
-	}
-	
 	/**
 	 * Get List of contacts from database
 	 * @return list of all contacts
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Employee> getContacts(int start, int limit) {
+	public List<Employee> getEmployees(int start, int limit) {
 		System.out.println(" I am here ");
 		List<Employee> list1 = null;
 		Query qr= em.createQuery("select e from Employee e");
 		list1 = qr.getResultList();
-		System.out.println(" Size list :  " + list1.size());
+		//System.out.println(" Size list :  " + list1.get(0).getEmp().getId());
         return list1;
 		/*DetachedCriteria criteria = DetachedCriteria.forClass(Employee.class);
 		System.out.println(" I am here2 ");
@@ -73,7 +67,7 @@ public class ContactDAO {
 	 * Delete a contact with the id passed as parameter
 	 * @param id
 	 */
-	public void deleteContact(int id){
+	/*public void deleteContact(int id){
 		Object record = hibernateTemplate.load(Contact.class, id);
 		hibernateTemplate.delete(record);
 	}
@@ -84,17 +78,17 @@ public class ContactDAO {
 	 * @param contact
 	 * @return contact added or updated in DB
 	 */
-	public Contact saveContact(Contact contact){
+	/*public Contact saveContact(Contact contact){
 		hibernateTemplate.saveOrUpdate(contact);
 		return contact;
-	}
+	}*/
 	
 	/**
 	 * Get total of Contacts from database
 	 * @return
 	 */
-	public int getTotalContacts(){
-	    return DataAccessUtils.intResult(hibernateTemplate.find("SELECT COUNT(*) FROM Contact"));
+	public int getTotalEmployees(long won, Date wkdate){
+	    return em.createNativeQuery("select count(*) from employee where won =" + won).getFirstResult();
 	}
 
 }

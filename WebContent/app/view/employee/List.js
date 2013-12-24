@@ -3,10 +3,10 @@ Ext.define('empJS.view.employee.List' ,{
 	alias : 'widget.employeelist',
 	columnLines: true,
 	stripeRows: true,
-	/*xtype: 'cell-editing',
+	/*xtype: 'cell-editing',*/
 	selModel: {
         selType: 'cellmodel'
-    },*/
+    },
 	requires: [
 	           'Ext.selection.CellModel',
 	           'Ext.grid.*',
@@ -23,7 +23,7 @@ Ext.define('empJS.view.employee.List' ,{
 	                     Ext.create('Ext.grid.RowNumberer'),
 	             {
 	        	   header: "EMP ID",
-	        	   dataIndex: 'empid',
+	        	   dataIndex: 'id',
 	        	   flex: 2,
 	        	   editor : {
 	        		   allowBlank: false
@@ -49,7 +49,8 @@ Ext.define('empJS.view.employee.List' ,{
 	        	   editor : new Ext.form.field.ComboBox({
 	        		   typeAhead: true,
 	        		   store: [
-	        		           ['TASK ORDER','TASK ORDER']
+	        		           ['TASK ORDER','TASK ORDER'],
+	        		           ['T&M','T&M']
 	        		           ]
 	        	   })
 	           },{
@@ -59,7 +60,9 @@ Ext.define('empJS.view.employee.List' ,{
 	        	   editor : new Ext.form.field.ComboBox({
 	        		   typeAhead: true,
 	        		   store: [
-	        		           ['MSM','MSM']
+	        		           ['MSM','MSM'],
+	        		           ['MTM','MTM']
+
 	        		           ]
 	        	   })
 	           },{
@@ -81,7 +84,7 @@ Ext.define('empJS.view.employee.List' ,{
 	        		   typeAhead: true,
 	        		   store: [
 	        		           ['Billable','Billable'],
-	        		           ['Non-Bill','Non-Bill']
+	        		           ['Bench','Bench']
 	        		           ]
 	        	   })
 	           },{
@@ -201,21 +204,14 @@ Ext.define('empJS.view.employee.List' ,{
 	           },{
 	        	   header: "PICKUP",
 	        	   flex: 2,
-	        	   dataIndex: 'pickup',
+	        	   dataIndex: 'pickLoc',
 	        	   editor : {
 	        		   allowBlank: true
 	        	   }
 	           },{
 	        	   header: "DROP",
 	        	   flex: 2,
-	        	   dataIndex: 'drop',
-	        	   editor : {
-	        		   allowBlank: true
-	        	   }
-	           },{
-	        	   header: "ACTIVE",
-	        	   flex: 2,
-	        	   dataIndex: 'active',
+	        	   dataIndex: 'dropLoc',
 	        	   editor : {
 	        		   allowBlank: true
 	        	   }
@@ -236,17 +232,10 @@ Ext.define('empJS.view.employee.List' ,{
 	                       id: 'WON',    
 	                       xtype: 'textfield'
 	                   },{
-	        			   iconCls: 'icon-search',
-	        			   itemId: 'search',
-	        			   text: 'Search',
-	        			   action: 'search'
-	        		   },{
-	                       xtype:'tbspacer',
-	                       flex:2.5
-	                   },{
 	                       id: 'WKDATE',    
 	                       xtype: 'datefield',
 	                       format: 'd-M-Y',
+	                       submitFormat: 'Y-m-d',
 	                       disabledDays: [0,2,3,4,5,6],
 	                       emptyText: 'Select a Monday',
 	                       listeners : {
@@ -263,19 +252,22 @@ Ext.define('empJS.view.employee.List' ,{
 	                           }
 	                       }
 	                   },{
+	        			   iconCls: 'icon-search',
+	        			   itemId: 'search',
+	        			   text: 'Search',
+	        			   action: 'search'
+	        		   },{
 	                       xtype:'tbspacer',
 	                       flex:1
 	                   },{
-	        			   iconCls: 'icon-save',
+	        			   iconCls: 'icon-user-add',
 	        			   itemId: 'add',
 	        			   text: 'Add',
-	        			   action: 'add',
-	        			   align: 'right'	
-	        				   
+	        			   action: 'add'	        				   
 	        		   },{
-	        			   iconCls: 'icon-delete',
-	        			   text: 'Delete',
-	        			   action: 'delete'
+	        			   iconCls: 'icon-save',
+	        			   text: 'Save',
+	        			   action: 'save'
 	        		   }]
 	        	   },
 	        	   {
@@ -283,7 +275,7 @@ Ext.define('empJS.view.employee.List' ,{
 	        		   dock:'bottom',
 	        		   store: 'Employees',
 	        		   displayInfo: true,
-	        		   displayMsg: 'Displaying Employees {0} - {1} of {2}',
+	        		   displayMsg: 'Displaying Employees {0} - {1} of {1}',
 	        		   emptyMsg: "No Employees to display"
 	        	   }];
 
